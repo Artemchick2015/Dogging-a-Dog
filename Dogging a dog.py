@@ -11,7 +11,7 @@ import time
 pygame.init()
 pygame.mixer.init()
 
-WIDTH, HEIGHT = 900, 600
+WIDTH, HEIGHT = 1920, 1080
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Dog vs Mushroomer")
 clock = pygame.time.Clock()
@@ -40,6 +40,12 @@ MUSHROOMER_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog
 # ОСОБЛИВЕ зображення для собаки в бою
 DOG_FIGHT_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-15_134510-removebg-preview%20(1).png"
 
+# Зображення поліцейського та фонів
+POLICE_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/1675858971_grizly-club-p-politseiskii-klipart-dlya-detei-31-removebg-preview.png"
+BACKGROUND_1_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA%20%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-23%20130527.png"
+BACKGROUND_2_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA%20%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-23%20132701.png"
+BACKGROUND_3_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA%20%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-23%20133246.png"
+
 MUSIC_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/NXGHT_DJ_ANXVAR_DJ_ZAP_-_BLUE_HORIZON_FUNK_-_SLOWED_(mp3.pm).mp3"
 BATTLE_MUSIC_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/0418%20(online-audio-converter.com).mp3"
 BATTLEFIELD_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/trava_pole_derevo_135338_3840x2160.jpg"
@@ -56,6 +62,12 @@ WIN_CUTSCENE_AUDIO = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a
 LOSE_CUTSCENE_VIDEO = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/0418%20(1)(2).mp4"
 LOSE_CUTSCENE_AUDIO = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/0418%20(1)(2)%20(online-audio-converter.com).mp3"
 
+# Нові катсцени для поліцейського зі звуком
+POLICE_CUTSCENE_1_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/0523(1).mp4"
+POLICE_CUTSCENE_1_AUDIO = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/0523(1)%20(online-audio-converter.com).mp3"
+POLICE_CUTSCENE_2_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/0523%20(3)(1).mp4"
+POLICE_CUTSCENE_2_AUDIO = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/0523%20(3)(1)%20(online-audio-converter.com).mp3"
+
 print("Завантаження зображень...")
 dog_normal_img = load_image(DOG_NORMAL_URL, (80, 80))
 dog_fight_img = load_image(DOG_FIGHT_URL, (112, 112))
@@ -63,6 +75,15 @@ mushroomer_normal_img = load_image(MUSHROOMER_URL, (80, 80))
 mushroomer_fight_img = load_image(MUSHROOMER_URL, (112, 112))
 mushroom_img = load_image(MUSHROOM_URL, (40, 40))
 battlefield_img = load_image(BATTLEFIELD_URL, (WIDTH, HEIGHT))
+
+# ЗБІЛЬШЕНИЙ ПОЛІЦЕЙСЬКИЙ - в 10 разів більше (600x800)
+POLICE_WIDTH = 600
+POLICE_HEIGHT = 800
+police_img = load_image(POLICE_URL, (POLICE_WIDTH, POLICE_HEIGHT))
+
+background_1_img = load_image(BACKGROUND_1_URL, (WIDTH, HEIGHT))
+background_2_img = load_image(BACKGROUND_2_URL, (WIDTH, HEIGHT))
+background_3_img = load_image(BACKGROUND_3_URL, (WIDTH, HEIGHT))
 print("Зображення завантажено!")
 
 # ---------- LOAD MUSIC ----------
@@ -81,8 +102,6 @@ def load_music(url):
 # Завантажуємо музику
 chase_music_file = load_music(MUSIC_URL)
 battle_music_file = load_music(BATTLE_MUSIC_URL)
-win_cutscene_music_file = load_music(WIN_CUTSCENE_AUDIO)
-lose_cutscene_music_file = load_music(LOSE_CUTSCENE_AUDIO)
 
 # ---------- CUTSCENE ----------
 def play_cutscene(video_url, audio_url=None, fps=33):
@@ -132,7 +151,6 @@ def play_cutscene(video_url, audio_url=None, fps=33):
 
 # ---------- FADE OUT MUSIC ----------
 def fade_out_music(duration_ms=2000):
-    """Плавне затухання музики"""
     if not pygame.mixer.music.get_busy():
         return
     
@@ -187,6 +205,8 @@ def draw_health_bars(dog_health, mushroomer_health, hits_landed):
 # ---------- GAME RESET ----------
 def reset_game():
     global dog, mushroomer, mushrooms, game_state, chase_start, dog_health, mushroomer_health, battle_result, hits_landed, last_mushroomer_attack_time
+    global police, police_background, police_x, police_y, show_pickup_text
+    
     dog = pygame.Rect(WIDTH//2, HEIGHT//2, 112, 112)
     mushroomer = pygame.Rect(50, 50, 112, 112)
 
@@ -203,12 +223,43 @@ def reset_game():
     battle_result = None
     hits_landed = 0
     last_mushroomer_attack_time = 0
+    
+    # Змінено розмір поліцейського для нового Rect
+    police = pygame.Rect(WIDTH//2 - POLICE_WIDTH//2, HEIGHT//2 - POLICE_HEIGHT//2, POLICE_WIDTH, POLICE_HEIGHT)
+    police_background = 1
+    police_x = WIDTH//2 - POLICE_WIDTH//2
+    police_y = HEIGHT//2 - POLICE_HEIGHT//2
+    show_pickup_text = False
+    
     try:
         pygame.mixer.music.stop()
     except:
         pass
 
-reset_game()
+# ---------- ПОЧАТКОВІ ЗМІННІ ----------
+dog = pygame.Rect(WIDTH//2, HEIGHT//2, 112, 112)
+mushroomer = pygame.Rect(50, 50, 112, 112)
+
+mushrooms = []
+for _ in range(10):
+    x = random.randint(50, WIDTH-90)
+    y = random.randint(50, HEIGHT-90)
+    mushrooms.append(pygame.Rect(x, y, 40, 40))
+
+game_state = "collect"
+chase_start = 0
+dog_health = 100
+mushroomer_health = 100
+battle_result = None
+hits_landed = 0
+last_mushroomer_attack_time = 0
+
+# Змінні поліцейського - ЗБІЛЬШЕНИЙ РОЗМІР
+police = pygame.Rect(WIDTH//2 - POLICE_WIDTH//2, HEIGHT//2 - POLICE_HEIGHT//2, POLICE_WIDTH, POLICE_HEIGHT)
+police_background = 1
+police_x = WIDTH//2 - POLICE_WIDTH//2
+police_y = HEIGHT//2 - POLICE_HEIGHT//2
+show_pickup_text = False
 
 # ---------- MAIN LOOP ----------
 running = True
@@ -231,19 +282,28 @@ while running:
                     mushroomer_health -= random.randint(6, 8)
                     hits_landed += 1
         
-        if game_state in ("dog_win", "mushroomer_win"):
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
-                reset_game()
+        if game_state == "police_level":
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_t and show_pickup_text:
+                play_cutscene(POLICE_CUTSCENE_2_URL, POLICE_CUTSCENE_2_AUDIO, 30)
+                fade_screen()
+                game_state = "black_screen"
+                show_pickup_text = False
 
     keys = pygame.key.get_pressed()
     speed = 5
     
+    # ---------- ВСІ ПЕРСОНАЖІ КЕРУЮТЬСЯ КЛАВІШАМИ WASD ----------
+    
     # ---------- ЕТАП 1: ЗБІР ГРИБІВ ----------
     if game_state == "collect":
-        if keys[pygame.K_LEFT]: dog.x -= speed
-        if keys[pygame.K_RIGHT]: dog.x += speed
-        if keys[pygame.K_UP]: dog.y -= speed
-        if keys[pygame.K_DOWN]: dog.y += speed
+        if keys[pygame.K_a]: 
+            dog.x -= speed
+        if keys[pygame.K_d]: 
+            dog.x += speed
+        if keys[pygame.K_w]: 
+            dog.y -= speed
+        if keys[pygame.K_s]: 
+            dog.y += speed
         dog.clamp_ip(screen.get_rect())
         
         for m in mushrooms[:]:
@@ -259,17 +319,25 @@ while running:
 
     # ---------- ЕТАП 2: ВТЕЧА 20 СЕКУНД ----------
     elif game_state == "chase":
-        if keys[pygame.K_LEFT]: dog.x -= speed
-        if keys[pygame.K_RIGHT]: dog.x += speed
-        if keys[pygame.K_UP]: dog.y -= speed
-        if keys[pygame.K_DOWN]: dog.y += speed
+        if keys[pygame.K_a]: 
+            dog.x -= speed
+        if keys[pygame.K_d]: 
+            dog.x += speed
+        if keys[pygame.K_w]: 
+            dog.y -= speed
+        if keys[pygame.K_s]: 
+            dog.y += speed
         dog.clamp_ip(screen.get_rect())
         
         mushroom_speed = 2.2
-        if mushroomer.x < dog.x: mushroomer.x += mushroom_speed
-        if mushroomer.x > dog.x: mushroomer.x -= mushroom_speed
-        if mushroomer.y < dog.y: mushroomer.y += mushroom_speed
-        if mushroomer.y > dog.y: mushroomer.y -= mushroom_speed
+        if mushroomer.x < dog.x: 
+            mushroomer.x += mushroom_speed
+        if mushroomer.x > dog.x: 
+            mushroomer.x -= mushroom_speed
+        if mushroomer.y < dog.y: 
+            mushroomer.y += mushroom_speed
+        if mushroomer.y > dog.y: 
+            mushroomer.y -= mushroom_speed
 
         if mushroomer.colliderect(dog):
             game_state = "lose"
@@ -296,9 +364,9 @@ while running:
 
     # ---------- ЕТАП 3: БІЙ ----------
     elif game_state == "fight":
-        if keys[pygame.K_LEFT]: 
+        if keys[pygame.K_a]: 
             dog.x -= speed
-        if keys[pygame.K_RIGHT]: 
+        if keys[pygame.K_d]: 
             dog.x += speed
         
         dog.x = max(50, min(WIDTH - 160, dog.x))
@@ -308,13 +376,8 @@ while running:
             mushroomer.x += mushroom_speed
         if mushroomer.x > dog.x: 
             mushroomer.x -= mushroom_speed
-        if mushroomer.y < dog.y: 
-            mushroomer.y += mushroom_speed
-        if mushroomer.y > dog.y: 
-            mushroomer.y -= mushroom_speed
         
         mushroomer.x = max(100, min(WIDTH - 140, mushroomer.x))
-        mushroomer.y = max(HEIGHT//4, min(3*HEIGHT//4, mushroomer.y))
         
         if current_time - last_mushroomer_attack_time >= 1500:
             if abs(dog.x - mushroomer.x) < 130 and abs(dog.y - mushroomer.y) < 130:
@@ -324,78 +387,143 @@ while running:
         
         # ПЕРЕВІРКА РЕЗУЛЬТАТУ БОЮ
         if hits_landed >= 15:
-            game_state = "dog_win"
-            battle_result = "dog"
             fade_out_music(1000)
             fade_screen()
-            # ВІДЕО ПРИ ПЕРЕМОЗІ зі своєю музикою
             play_cutscene(WIN_CUTSCENE_VIDEO, WIN_CUTSCENE_AUDIO, fps=30)
             fade_screen()
+            play_cutscene(POLICE_CUTSCENE_1_URL, POLICE_CUTSCENE_1_AUDIO, 30)
+            fade_screen()
+            game_state = "police_level"
+            police_background = 1
+            police_x = WIDTH//2 - POLICE_WIDTH//2
+            police_y = HEIGHT//2 - POLICE_HEIGHT//2
+            police.x = police_x
+            police.y = police_y
+            
         elif dog_health <= 0:
-            game_state = "mushroomer_win"
-            battle_result = "mushroomer"
             fade_out_music(1000)
             fade_screen()
-            # ВІДЕО ПРИ ПРОГРАШІ зі своєю музикою
             play_cutscene(LOSE_CUTSCENE_VIDEO, LOSE_CUTSCENE_AUDIO, fps=30)
             fade_screen()
+            game_state = "lose"
 
-    # ---------- ЕКРАНИ ПЕРЕМОГИ/ПОРАЗКИ (текстові повідомлення) ----------
-    if game_state == "mushroomer_win" and battle_result == "mushroomer":
-        screen.fill((0, 0, 0))
-        text3 = font.render("Натисни R щоб спробувати ще раз", True, (200, 200, 200))
-        screen.blit(text3, (WIDTH//2 - 200, HEIGHT//2 + 80))
-        pygame.display.update()
+    # ---------- ЕТАП 4: ПОЛІЦЕЙСЬКИЙ РІВЕНЬ (РУХ ВПРАВО ДЛЯ ЗМІНИ ЛОКАЦІЇ) ----------
+    elif game_state == "police_level":
+        # РУХ ПОЛІЦЕЙСЬКОГО ВЛІВО/ВПРАВО/ВВЕРХ/ВНИЗ
+        if keys[pygame.K_a]: 
+            police_x -= speed
+        if keys[pygame.K_d]: 
+            police_x += speed
+        if keys[pygame.K_w]: 
+            police_y -= speed
+        if keys[pygame.K_s]: 
+            police_y += speed
         
-    elif game_state == "dog_win" and battle_result == "dog":
-        screen.fill((0, 0, 0))
-        text3 = font.render("Натисни R щоб зіграти ще раз", True, (200, 200, 200))
-        screen.blit(text3, (WIDTH//2 - 200, HEIGHT//2 + 80))
+        # Обмеження руху в межах екрану для збільшеного поліцейського
+        police_x = max(0, min(WIDTH - POLICE_WIDTH, police_x))
+        police_y = max(0, min(HEIGHT - POLICE_HEIGHT, police_y))
+        police.x = police_x
+        police.y = police_y
+        
+        # ПЕРЕХІД МІЖ ЛОКАЦІЯМИ КОЛИ ВПИРАЄМОСЬ В ПРАВУ СТІНУ
+        if police_x >= WIDTH - POLICE_WIDTH - 5:
+            if police_background == 1:
+                police_background = 2
+                police_x = 5
+                police.x = police_x
+                pygame.time.delay(100)
+            elif police_background == 2:
+                police_background = 3
+                police_x = 5
+                police.x = police_x
+                pygame.time.delay(100)
+        
+        # Показуємо текст підібрати собаку тільки на 3-му фоні
+        show_pickup_text = (police_background == 3)
+        
+        # Малювання фону
+        if police_background == 1:
+            screen.blit(background_1_img, (0, 0))
+        elif police_background == 2:
+            screen.blit(background_2_img, (0, 0))
+        elif police_background == 3:
+            screen.blit(background_3_img, (0, 0))
+        
+        # Малювання ЗБІЛЬШЕНОГО поліцейського
+        screen.blit(police_img, police)
+        
+        if show_pickup_text:
+            pickup_text = font.render("T - підібрати собаку", True, (255, 255, 255))
+            text_rect = pickup_text.get_rect(center=(WIDTH//2, HEIGHT - 50))
+            screen.blit(pickup_text, text_rect)
+        
+        controls_text = font.render("WASD - рух | Дійди до правого краю для переходу", True, (255, 255, 255))
+        screen.blit(controls_text, (10, HEIGHT - 40))
+        
+        # Інформація про поточну локацію
+        location_text = font.render(f"Локація: {police_background}/3", True, (255, 255, 255))
+        screen.blit(location_text, (10, 10))
+        
         pygame.display.update()
+        clock.tick(60)
+        continue
+    
+    elif game_state == "black_screen":
+        screen.fill((0, 0, 0))
+        pygame.display.update()
+        clock.tick(60)
+        continue
 
     # ---------- МАЛЮВАННЯ ----------
-    if game_state in ("collect", "chase", "lose"):
-        screen.fill((255, 255, 255))
-    else:
-        screen.blit(battlefield_img, (0, 0))
     
-    if game_state == "collect":
-        for m in mushrooms:
-            screen.blit(mushroom_img, m)
-    
-    if game_state == "fight":
-        screen.blit(dog_fight_img, dog)
-    else:
-        screen.blit(dog_normal_img, dog)
-    
-    if game_state == "fight":
-        screen.blit(mushroomer_fight_img, mushroomer)
-    elif game_state in ("chase", "lose"):
-        screen.blit(mushroomer_normal_img, mushroomer)
-    
-    if game_state == "fight":
-        draw_health_bars(dog_health, mushroomer_health, hits_landed)
-        control_text = font.render("← →  |  E", True, (255, 255, 255))
-        screen.blit(control_text, (WIDTH//2 - 50, HEIGHT - 40))
-        
-        if abs(dog.x - mushroomer.x) < 120:
-            ready_text = font.render("E", True, (0, 255, 0))
-            screen.blit(ready_text, (WIDTH//2 - 10, HEIGHT - 80))
-        
-        time_since_last = current_time - last_mushroomer_attack_time
-        if time_since_last < 1500:
-            cooldown_text = font.render(f"{(1500 - time_since_last)//100 + 1}", True, (255, 200, 0))
-            screen.blit(cooldown_text, (mushroomer.x + 50, mushroomer.y - 20))
-
-    if game_state == "chase":
-        elapsed_sec = (pygame.time.get_ticks() - chase_start) // 1000
-        elapsed_sec = min(elapsed_sec, 20)
-        txt = font.render(f"{elapsed_sec}/20", True, (0, 0, 0))
-        screen.blit(txt, (10, 10))
-
     if game_state == "lose":
-        txt = font.render("Натисни R", True, (255, 0, 0))
-        screen.blit(txt, (WIDTH//2 - 50, HEIGHT//2))
+        screen.fill((0, 0, 0))
+        txt = font.render("Натисни R щоб спробувати ще раз", True, (255, 255, 255))
+        screen.blit(txt, (WIDTH//2 - 200, HEIGHT//2))
+    
+    else:
+        if game_state in ("collect", "chase"):
+            screen.fill((255, 255, 255))
+        else:
+            screen.blit(battlefield_img, (0, 0))
+        
+        if game_state == "collect":
+            for m in mushrooms:
+                screen.blit(mushroom_img, m)
+        
+        if game_state == "fight":
+            screen.blit(dog_fight_img, dog)
+        else:
+            screen.blit(dog_normal_img, dog)
+        
+        if game_state == "fight":
+            screen.blit(mushroomer_fight_img, mushroomer)
+        elif game_state in ("chase", "lose"):
+            screen.blit(mushroomer_normal_img, mushroomer)
+        
+        if game_state == "fight":
+            draw_health_bars(dog_health, mushroomer_health, hits_landed)
+            control_text = font.render("A/D - рух  |  E - атака", True, (255, 255, 255))
+            screen.blit(control_text, (WIDTH//2 - 100, HEIGHT - 40))
+            
+            if abs(dog.x - mushroomer.x) < 120:
+                ready_text = font.render("E", True, (0, 255, 0))
+                screen.blit(ready_text, (WIDTH//2 - 10, HEIGHT - 80))
+            
+            time_since_last = current_time - last_mushroomer_attack_time
+            if time_since_last < 1500:
+                cooldown_text = font.render(f"{(1500 - time_since_last)//100 + 1}", True, (255, 200, 0))
+                screen.blit(cooldown_text, (mushroomer.x + 50, mushroomer.y - 20))
+
+        if game_state == "chase":
+            elapsed_sec = (pygame.time.get_ticks() - chase_start) // 1000
+            elapsed_sec = min(elapsed_sec, 20)
+            txt = font.render(f"{elapsed_sec}/20", True, (0, 0, 0))
+            screen.blit(txt, (10, 10))
+        
+        if game_state in ("collect", "chase"):
+            controls_text = font.render("WASD - рух", True, (0, 0, 0))
+            screen.blit(controls_text, (10, HEIGHT - 40))
 
     pygame.display.update()
     clock.tick(60)
