@@ -17,6 +17,7 @@ pygame.display.set_caption("Dog vs Mushroomer")
 clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 36)
 fight_font = pygame.font.SysFont(None, 48)
+big_font = pygame.font.SysFont(None, 72)
 
 # ---------- LOAD IMAGES FROM GITHUB ----------
 def load_image(url, size):
@@ -46,6 +47,19 @@ BACKGROUND_1_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-D
 BACKGROUND_2_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA%20%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-23%20132701.png"
 BACKGROUND_3_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA%20%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-23%20133246.png"
 
+# Зображення для 4-го епізоду
+DOG_FRIEND_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/photo_2026-07-16_10-18-13-removebg-preview.png"
+STAIRCASE_BG_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/1710786641_bigfoto-name-4smf-p-akkuratnii-remont-v-podezde-3.jpg"
+CHOICE_BG_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/images%20(2).jpg"
+FOREST_BG_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/dsc_3963-min-1-scaled-e1658226147615.jpg"
+RUN_BG_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/images%20(4).jpg"
+RUN_BG_2_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/5883_styleup_2700-1-scaled.jpg"
+FINAL_BG_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/image.png"
+MUSHROOMER_FRIEND_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/Adsiz-tasarim-1-removebg-preview.png"
+
+# Зображення для 5-го епізоду
+EPISODE_5_BG_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/photo_2026-08-08_19-34-46.jpg"
+
 MUSIC_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/NXGHT_DJ_ANXVAR_DJ_ZAP_-_BLUE_HORIZON_FUNK_-_SLOWED_(mp3.pm).mp3"
 BATTLE_MUSIC_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/0418%20(online-audio-converter.com).mp3"
 BATTLEFIELD_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/trava_pole_derevo_135338_3840x2160.jpg"
@@ -68,6 +82,20 @@ POLICE_CUTSCENE_1_AUDIO = "https://raw.githubusercontent.com/Artemchick2015/Dogg
 POLICE_CUTSCENE_2_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/0523%20(3)(1).mp4"
 POLICE_CUTSCENE_2_AUDIO = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/0523%20(3)(1)%20(online-audio-converter.com).mp3"
 
+# Нові катсцени для 4-го епізоду
+EPISODE_4_CUTSCENE_1_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/0714%20(1)(2).mp4"
+EPISODE_4_CUTSCENE_1_AUDIO = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/0714%20(1)(2).MP3"
+EPISODE_4_CUTSCENE_2_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/0721.mp4"
+EPISODE_4_CUTSCENE_2_AUDIO = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/0721.MP3"
+EPISODE_4_CUTSCENE_3_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/0721%20(1).mp4"
+EPISODE_4_CUTSCENE_3_AUDIO = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/0721%20(1).MP3"
+EPISODE_4_CUTSCENE_4_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/0721%20(2).mp4"
+EPISODE_4_CUTSCENE_4_AUDIO = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/0721%20(2).MP3"
+
+# Катсцени для 5-го епізоду
+EPISODE_5_CUTSCENE_URL = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/IMG_7682.MP4"
+EPISODE_5_CUTSCENE_AUDIO = "https://raw.githubusercontent.com/Artemchick2015/Dogging-a-Dog/main/IMG_7682%20(online-audio-converter.com).mp3"
+
 print("Завантаження зображень...")
 dog_normal_img = load_image(DOG_NORMAL_URL, (80, 80))
 dog_fight_img = load_image(DOG_FIGHT_URL, (112, 112))
@@ -84,6 +112,26 @@ police_img = load_image(POLICE_URL, (POLICE_WIDTH, POLICE_HEIGHT))
 background_1_img = load_image(BACKGROUND_1_URL, (WIDTH, HEIGHT))
 background_2_img = load_image(BACKGROUND_2_URL, (WIDTH, HEIGHT))
 background_3_img = load_image(BACKGROUND_3_URL, (WIDTH, HEIGHT))
+
+# Завантаження зображень для 4-го епізоду (збільшені в 3 рази)
+DOG_EPISODE4_SIZE = (240, 240)  # 80 * 3 = 240
+DOG_FRIEND_SIZE = (240, 240)    # 80 * 3 = 240
+
+dog_episode4_img = load_image(DOG_NORMAL_URL, DOG_EPISODE4_SIZE)
+dog_friend_episode4_img = load_image(DOG_FRIEND_URL, DOG_FRIEND_SIZE)
+mushroomer_episode4_img = load_image(MUSHROOMER_URL, (240, 240))
+mushroomer_friend_episode4_img = load_image(MUSHROOMER_FRIEND_URL, (240, 240))
+
+staircase_bg_img = load_image(STAIRCASE_BG_URL, (WIDTH, HEIGHT))
+choice_bg_img = load_image(CHOICE_BG_URL, (WIDTH, HEIGHT))
+forest_bg_img = load_image(FOREST_BG_URL, (WIDTH, HEIGHT))
+run_bg_img = load_image(RUN_BG_URL, (WIDTH, HEIGHT))
+run_bg_2_img = load_image(RUN_BG_2_URL, (WIDTH, HEIGHT))
+final_bg_img = load_image(FINAL_BG_URL, (WIDTH, HEIGHT))
+
+# Завантаження фону для 5-го епізоду
+episode_5_bg_img = load_image(EPISODE_5_BG_URL, (WIDTH, HEIGHT))
+
 print("Зображення завантажено!")
 
 # ---------- LOAD MUSIC ----------
@@ -104,7 +152,7 @@ chase_music_file = load_music(MUSIC_URL)
 battle_music_file = load_music(BATTLE_MUSIC_URL)
 
 # ---------- CUTSCENE ----------
-def play_cutscene(video_url, audio_url=None, fps=33):
+def play_cutscene(video_url, audio_url=None, fps=33, skip_key=pygame.K_e, skip_all=False, speed_multiplier=1.0):
     try:
         if "github.com" in video_url and "/blob/" in video_url:
             video_url = video_url.replace("github.com", "raw.githubusercontent.com").replace("/blob/", "/")
@@ -114,7 +162,8 @@ def play_cutscene(video_url, audio_url=None, fps=33):
         video_temp.close()
 
         cap = cv2.VideoCapture(video_temp.name)
-        delay = int(1000 / fps)
+        delay = int(1000 / (fps * speed_multiplier))
+        start_time = pygame.time.get_ticks()
         
         if audio_url:
             if "github.com" in audio_url and "/blob/" in audio_url:
@@ -125,12 +174,28 @@ def play_cutscene(video_url, audio_url=None, fps=33):
             pygame.mixer.music.load(audio_temp.name)
             pygame.mixer.music.play()
 
+        skip_held = False
+        skip_start_time = 0
+
         while cap.isOpened():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     cap.release()
                     pygame.quit()
                     sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == skip_key and not skip_all:
+                        skip_held = True
+                        skip_start_time = pygame.time.get_ticks()
+                if event.type == pygame.KEYUP:
+                    if event.key == skip_key:
+                        skip_held = False
+
+            if skip_held and not skip_all and pygame.time.get_ticks() - skip_start_time >= 2500:
+                break
+            
+            if skip_all and keys_pressed_for_skip():
+                break
 
             ret, frame = cap.read()
             if not ret:
@@ -148,6 +213,10 @@ def play_cutscene(video_url, audio_url=None, fps=33):
         pygame.mixer.music.stop()
     except Exception as e:
         print(f"Помилка відтворення катсцени: {e}")
+
+def keys_pressed_for_skip():
+    keys = pygame.key.get_pressed()
+    return keys[pygame.K_e]
 
 # ---------- FADE OUT MUSIC ----------
 def fade_out_music(duration_ms=2000):
@@ -206,6 +275,8 @@ def draw_health_bars(dog_health, mushroomer_health, hits_landed):
 def reset_game():
     global dog, mushroomer, mushrooms, game_state, chase_start, dog_health, mushroomer_health, battle_result, hits_landed, last_mushroomer_attack_time
     global police, police_background, police_x, police_y, show_pickup_text
+    global episode4_stage, dog_friend, choice_direction, forest_enter_side, run_start_time, at_center, controls_blocked
+    global episode5_stage, episode5_question_state, episode5_question_phase
     
     dog = pygame.Rect(WIDTH//2, HEIGHT//2, 112, 112)
     mushroomer = pygame.Rect(50, 50, 112, 112)
@@ -224,12 +295,26 @@ def reset_game():
     hits_landed = 0
     last_mushroomer_attack_time = 0
     
-    # Змінено розмір поліцейського для нового Rect
     police = pygame.Rect(WIDTH//2 - POLICE_WIDTH//2, HEIGHT//2 - POLICE_HEIGHT//2, POLICE_WIDTH, POLICE_HEIGHT)
     police_background = 1
     police_x = WIDTH//2 - POLICE_WIDTH//2
     police_y = HEIGHT//2 - POLICE_HEIGHT//2
     show_pickup_text = False
+    
+    # Скидання змінних 4-го епізоду
+    episode4_stage = 0
+    dog_friend = pygame.Rect(WIDTH//2 - 100, HEIGHT//2, 240, 240)
+    choice_direction = None
+    forest_enter_side = None
+    run_start_time = 0
+    at_center = False
+    controls_blocked = False
+    episode4_retry_stage = 0
+    
+    # Скидання змінних 5-го епізоду
+    episode5_stage = 0
+    episode5_question_state = "first"
+    episode5_question_phase = "ready"
     
     try:
         pygame.mixer.music.stop()
@@ -261,6 +346,24 @@ police_x = WIDTH//2 - POLICE_WIDTH//2
 police_y = HEIGHT//2 - POLICE_HEIGHT//2
 show_pickup_text = False
 
+# Змінні для 4-го епізоду
+episode4_stage = 0
+dog_friend = pygame.Rect(WIDTH//2 - 100, HEIGHT//2, 240, 240)
+choice_direction = None
+forest_enter_side = None
+run_start_time = 0
+at_center = False
+controls_blocked = False
+episode4_retry_stage = 0
+
+# Змінні для 5-го епізоду
+episode5_stage = 0
+episode5_question_state = "first"
+episode5_question_phase = "ready"
+
+# Фіксована Y-позиція на 70%
+GROUND_Y = int(HEIGHT * 0.70)
+
 # ---------- MAIN LOOP ----------
 running = True
 while running:
@@ -275,24 +378,98 @@ while running:
         if game_state == "lose":
             if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
                 reset_game()
-        
+
         if game_state == "fight":
             if event.type == pygame.KEYDOWN and event.key == pygame.K_e:
                 if abs(dog.x - mushroomer.x) < 120 and abs(dog.y - mushroomer.y) < 120:
                     mushroomer_health -= random.randint(6, 8)
                     hits_landed += 1
-        
+
         if game_state == "police_level":
             if event.type == pygame.KEYDOWN and event.key == pygame.K_t and show_pickup_text:
                 play_cutscene(POLICE_CUTSCENE_2_URL, POLICE_CUTSCENE_2_AUDIO, 30)
                 fade_screen()
-                game_state = "black_screen"
+                game_state = "episode4"
+                episode4_stage = 0
                 show_pickup_text = False
+
+        # Обробка подій для 4-го епізоду
+        if game_state == "episode4":
+            if episode4_stage == 1 and at_center:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_e:
+                    fade_screen()
+                    episode4_stage = 2
+                    dog.x = WIDTH//2 - 120
+                    dog.y = GROUND_Y
+                    dog_friend.x = WIDTH//2 + 120
+                    dog_friend.y = GROUND_Y
+                    at_center = False
+                    controls_blocked = False
+            
+            elif episode4_stage == 2:
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_a:
+                        choice_direction = "left"
+                        forest_enter_side = "right"
+                        episode4_stage = 3
+                        dog.x = WIDTH - 240
+                        dog.y = GROUND_Y
+                        dog_friend.x = WIDTH - 480
+                        dog_friend.y = GROUND_Y
+                        fade_screen()
+                    elif event.key == pygame.K_d:
+                        choice_direction = "right"
+                        forest_enter_side = "left"
+                        episode4_stage = 3
+                        dog.x = 20
+                        dog.y = GROUND_Y
+                        dog_friend.x = 260
+                        dog_friend.y = GROUND_Y
+                        fade_screen()
+            
+            elif episode4_stage == 6:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_e:
+                    play_cutscene(EPISODE_4_CUTSCENE_3_URL, EPISODE_4_CUTSCENE_3_AUDIO, 30, skip_all=True)
+                    fade_screen()
+                    play_cutscene(EPISODE_4_CUTSCENE_4_URL, EPISODE_4_CUTSCENE_4_AUDIO, 30, skip_all=True)
+                    fade_screen()
+                    game_state = "episode5"
+                    episode5_stage = 0
+                    episode5_question_state = "first"
+                    episode5_question_phase = "ready"
+                    dog = pygame.Rect(20, GROUND_Y, 240, 240)
+                    dog_friend = pygame.Rect(260, GROUND_Y, 240, 240)
+            
+            elif episode4_stage == 7:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
+                    episode4_stage = episode4_retry_stage
+                    dog = pygame.Rect(50, GROUND_Y, 240, 240)
+                    dog_friend = pygame.Rect(290, GROUND_Y, 240, 240)
+                    mushroomer = pygame.Rect(-240, GROUND_Y, 240, 240)
+                    run_start_time = pygame.time.get_ticks()
+
+        # Обробка подій для 5-го епізоду
+        if game_state == "episode5":
+            if episode5_stage == 2:
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_y:
+                        if episode5_question_phase == "ready":
+                            episode5_question_phase = "sure"
+                            episode5_question_state = "second"
+                        elif episode5_question_phase == "sure":
+                            fade_screen()
+                            play_cutscene(EPISODE_5_CUTSCENE_URL, EPISODE_5_CUTSCENE_AUDIO, 33, skip_all=True, speed_multiplier=3.0)
+                            fade_screen()
+                            game_state = "game_over"
+                            episode5_stage = 3
+                    elif event.key == pygame.K_n:
+                        if episode5_question_phase == "ready":
+                            episode5_question_phase = "ready"
+                        elif episode5_question_phase == "sure":
+                            pass
 
     keys = pygame.key.get_pressed()
     speed = 5
-    
-    # ---------- ВСІ ПЕРСОНАЖІ КЕРУЮТЬСЯ КЛАВІШАМИ WASD ----------
     
     # ---------- ЕТАП 1: ЗБІР ГРИБІВ ----------
     if game_state == "collect":
@@ -385,7 +562,6 @@ while running:
                 last_mushroomer_attack_time = current_time
                 pygame.time.delay(50)
         
-        # ПЕРЕВІРКА РЕЗУЛЬТАТУ БОЮ
         if hits_landed >= 15:
             fade_out_music(1000)
             fade_screen()
@@ -407,9 +583,8 @@ while running:
             fade_screen()
             game_state = "lose"
 
-    # ---------- ЕТАП 4: ПОЛІЦЕЙСЬКИЙ РІВЕНЬ (РУХ ВПРАВО ДЛЯ ЗМІНИ ЛОКАЦІЇ) ----------
+    # ---------- ЕТАП 4: ПОЛІЦЕЙСЬКИЙ РІВЕНЬ ----------
     elif game_state == "police_level":
-        # РУХ ПОЛІЦЕЙСЬКОГО ВЛІВО/ВПРАВО/ВВЕРХ/ВНИЗ
         if keys[pygame.K_a]: 
             police_x -= speed
         if keys[pygame.K_d]: 
@@ -419,13 +594,11 @@ while running:
         if keys[pygame.K_s]: 
             police_y += speed
         
-        # Обмеження руху в межах екрану для збільшеного поліцейського
         police_x = max(0, min(WIDTH - POLICE_WIDTH, police_x))
         police_y = max(0, min(HEIGHT - POLICE_HEIGHT, police_y))
         police.x = police_x
         police.y = police_y
         
-        # ПЕРЕХІД МІЖ ЛОКАЦІЯМИ КОЛИ ВПИРАЄМОСЬ В ПРАВУ СТІНУ
         if police_x >= WIDTH - POLICE_WIDTH - 5:
             if police_background == 1:
                 police_background = 2
@@ -438,10 +611,8 @@ while running:
                 police.x = police_x
                 pygame.time.delay(100)
         
-        # Показуємо текст підібрати собаку тільки на 3-му фоні
         show_pickup_text = (police_background == 3)
         
-        # Малювання фону
         if police_background == 1:
             screen.blit(background_1_img, (0, 0))
         elif police_background == 2:
@@ -449,7 +620,6 @@ while running:
         elif police_background == 3:
             screen.blit(background_3_img, (0, 0))
         
-        # Малювання ЗБІЛЬШЕНОГО поліцейського
         screen.blit(police_img, police)
         
         if show_pickup_text:
@@ -460,16 +630,317 @@ while running:
         controls_text = font.render("WASD - рух | Дійди до правого краю для переходу", True, (255, 255, 255))
         screen.blit(controls_text, (10, HEIGHT - 40))
         
-        # Інформація про поточну локацію
         location_text = font.render(f"Локація: {police_background}/3", True, (255, 255, 255))
         screen.blit(location_text, (10, 10))
         
         pygame.display.update()
         clock.tick(60)
         continue
+
+    # ---------- ЕТАП 5: 4-Й ЕПІЗОД ----------
+    elif game_state == "episode4":
+        if episode4_stage == 0:
+            play_cutscene(EPISODE_4_CUTSCENE_1_URL, EPISODE_4_CUTSCENE_1_AUDIO, 30, skip_all=False)
+            fade_screen()
+            episode4_stage = 1
+            dog = pygame.Rect(20, GROUND_Y, 240, 240)
+            dog_friend = pygame.Rect(260, GROUND_Y, 240, 240)
+            at_center = False
+            controls_blocked = False
+            
+        elif episode4_stage == 1:
+            screen.blit(staircase_bg_img, (0, 0))
+            screen.blit(dog_episode4_img, dog)
+            screen.blit(dog_friend_episode4_img, dog_friend)
+            
+            if not at_center:
+                if keys[pygame.K_a]:
+                    dog.x -= speed
+                    dog_friend.x -= speed
+                if keys[pygame.K_d]:
+                    dog.x += speed
+                    dog_friend.x += speed
+                
+                dog.x = max(20, min(WIDTH - 240, dog.x))
+                dog_friend.x = max(20, min(WIDTH - 240, dog_friend.x))
+                dog.y = GROUND_Y
+                dog_friend.y = GROUND_Y
+                
+                if abs(dog.x - WIDTH//2 + 120) < 30:
+                    at_center = True
+                    controls_blocked = True
+            
+            if at_center:
+                e_text = big_font.render("E - СПУСТИТИСЬ З СХОД", True, (255, 255, 0))
+                text_rect = e_text.get_rect(center=(WIDTH//2, HEIGHT - 100))
+                screen.blit(e_text, text_rect)
+                
+                if pygame.time.get_ticks() % 1000 < 500:
+                    arrow_text = big_font.render("▼", True, (255, 255, 0))
+                    arrow_rect = arrow_text.get_rect(center=(WIDTH//2, HEIGHT - 50))
+                    screen.blit(arrow_text, arrow_rect)
+            
+        elif episode4_stage == 2:
+            screen.blit(choice_bg_img, (0, 0))
+            screen.blit(dog_episode4_img, dog)
+            screen.blit(dog_friend_episode4_img, dog_friend)
+            
+            choice_text = fight_font.render("Ви можете піти гуляти в будь яку сторону", True, (255, 255, 255))
+            text_rect = choice_text.get_rect(center=(WIDTH//2, 50))
+            screen.blit(choice_text, text_rect)
+            
+            left_text = big_font.render("A - ЛІВО", True, (255, 255, 0))
+            right_text = big_font.render("D - ПРАВО", True, (255, 255, 0))
+            screen.blit(left_text, (100, HEIGHT//2))
+            screen.blit(right_text, (WIDTH - 200, HEIGHT//2))
+            
+            controls_text = font.render("Натисніть A або D для вибору", True, (255, 255, 255))
+            screen.blit(controls_text, (WIDTH//2 - 150, HEIGHT - 50))
+            
+        elif episode4_stage == 3:
+            screen.blit(forest_bg_img, (0, 0))
+            screen.blit(dog_episode4_img, dog)
+            screen.blit(dog_friend_episode4_img, dog_friend)
+            
+            if keys[pygame.K_a]:
+                dog.x -= speed
+                dog_friend.x -= speed
+            if keys[pygame.K_d]:
+                dog.x += speed
+                dog_friend.x += speed
+            
+            dog.y = GROUND_Y
+            dog_friend.y = GROUND_Y
+            
+            dog.x = max(20, min(WIDTH - 240, dog.x))
+            dog_friend.x = max(20, min(WIDTH - 240, dog_friend.x))
+            
+            if abs(dog.x - WIDTH//2 + 120) < 30:
+                fade_screen()
+                play_cutscene(EPISODE_4_CUTSCENE_2_URL, EPISODE_4_CUTSCENE_2_AUDIO, 30, skip_all=True)
+                fade_screen()
+                episode4_stage = 4
+                episode4_retry_stage = 4
+                dog = pygame.Rect(50, GROUND_Y, 240, 240)
+                dog_friend = pygame.Rect(290, GROUND_Y, 240, 240)
+                mushroomer = pygame.Rect(-240, GROUND_Y, 240, 240)
+                run_start_time = pygame.time.get_ticks()
+                
+        elif episode4_stage == 4:
+            screen.blit(run_bg_img, (0, 0))
+            screen.blit(dog_episode4_img, dog)
+            screen.blit(dog_friend_episode4_img, dog_friend)
+            
+            escape_text = big_font.render("ВТІКАЙ ВІД ГРИБНИКА, A/D - ВТІКАТИ", True, (255, 0, 0))
+            text_rect = escape_text.get_rect(center=(WIDTH//2, 50))
+            screen.blit(escape_text, text_rect)
+            
+            if dog.colliderect(mushroomer) or dog_friend.colliderect(mushroomer):
+                episode4_stage = 7
+                episode4_retry_stage = 4
+            
+            if pygame.time.get_ticks() - run_start_time > 3000:
+                screen.blit(mushroomer_episode4_img, mushroomer)
+                screen.blit(mushroomer_friend_episode4_img, (mushroomer.x - 240, mushroomer.y))
+                
+                if mushroomer.x < dog.x:
+                    mushroomer.x += 2.5
+                if mushroomer.x > dog.x:
+                    mushroomer.x -= 2.5
+            
+            if keys[pygame.K_a]:
+                dog.x -= speed
+                dog_friend.x -= speed
+            if keys[pygame.K_d]:
+                dog.x += speed
+                dog_friend.x += speed
+            
+            dog.y = GROUND_Y
+            dog_friend.y = GROUND_Y
+            mushroomer.y = GROUND_Y
+            
+            dog.x = max(20, min(WIDTH - 240, dog.x))
+            dog_friend.x = max(20, min(WIDTH - 240, dog_friend.x))
+            
+            if dog.x >= WIDTH - 240:
+                fade_screen()
+                episode4_stage = 5
+                episode4_retry_stage = 5
+                dog = pygame.Rect(50, GROUND_Y, 240, 240)
+                dog_friend = pygame.Rect(290, GROUND_Y, 240, 240)
+                mushroomer = pygame.Rect(-240, GROUND_Y, 240, 240)
+                run_start_time = pygame.time.get_ticks()
+                
+        elif episode4_stage == 5:
+            screen.blit(run_bg_2_img, (0, 0))
+            screen.blit(dog_episode4_img, dog)
+            screen.blit(dog_friend_episode4_img, dog_friend)
+            
+            escape_text = big_font.render("ВТІКАЙ ВІД ГРИБНИКА, A/D - ВТІКАТИ", True, (255, 0, 0))
+            text_rect = escape_text.get_rect(center=(WIDTH//2, 50))
+            screen.blit(escape_text, text_rect)
+            
+            if dog.colliderect(mushroomer) or dog_friend.colliderect(mushroomer):
+                episode4_stage = 7
+                episode4_retry_stage = 5
+            
+            if pygame.time.get_ticks() - run_start_time > 3000:
+                screen.blit(mushroomer_episode4_img, mushroomer)
+                screen.blit(mushroomer_friend_episode4_img, (mushroomer.x - 240, mushroomer.y))
+                
+                if mushroomer.x < dog.x:
+                    mushroomer.x += 3
+                if mushroomer.x > dog.x:
+                    mushroomer.x -= 3
+            
+            if keys[pygame.K_a]:
+                dog.x -= speed
+                dog_friend.x -= speed
+            if keys[pygame.K_d]:
+                dog.x += speed
+                dog_friend.x += speed
+            
+            dog.y = GROUND_Y
+            dog_friend.y = GROUND_Y
+            mushroomer.y = GROUND_Y
+            
+            dog.x = max(20, min(WIDTH - 240, dog.x))
+            dog_friend.x = max(20, min(WIDTH - 240, dog_friend.x))
+            
+            if dog.x >= WIDTH - 240:
+                fade_screen()
+                episode4_stage = 6
+                dog = pygame.Rect(WIDTH//2 - 120, GROUND_Y, 240, 240)
+                dog_friend = pygame.Rect(WIDTH//2 + 120, GROUND_Y, 240, 240)
+                
+        elif episode4_stage == 6:
+            screen.blit(final_bg_img, (0, 0))
+            screen.blit(dog_episode4_img, dog)
+            screen.blit(dog_friend_episode4_img, dog_friend)
+            
+            fight_text = big_font.render("Зупинити грибника - E", True, (255, 255, 0))
+            text_rect = fight_text.get_rect(center=(WIDTH//2, 50))
+            screen.blit(fight_text, text_rect)
+        
+        elif episode4_stage == 7:
+            screen.fill((0, 0, 0))
+            red_overlay = pygame.Surface((WIDTH, HEIGHT))
+            red_overlay.set_alpha(100)
+            red_overlay.fill((255, 0, 0))
+            screen.blit(red_overlay, (0, 0))
+            
+            caught_text = big_font.render("Вас спіймав грибник!", True, (255, 255, 255))
+            text_rect = caught_text.get_rect(center=(WIDTH//2, HEIGHT//2 - 50))
+            screen.blit(caught_text, text_rect)
+            
+            retry_text = fight_font.render("Enter - Повторити спробу", True, (255, 255, 0))
+            retry_rect = retry_text.get_rect(center=(WIDTH//2, HEIGHT//2 + 50))
+            screen.blit(retry_text, retry_rect)
+                
+        pygame.display.update()
+        clock.tick(60)
+        continue
+    
+    # ---------- ЕТАП 6: 5-Й ЕПІЗОД ----------
+    elif game_state == "episode5":
+        if episode5_stage == 0:
+            episode5_stage = 1
+            dog = pygame.Rect(20, GROUND_Y, 240, 240)
+            dog_friend = pygame.Rect(260, GROUND_Y, 240, 240)
+            at_center = False
+            controls_blocked = False
+            episode5_question_state = "first"
+            episode5_question_phase = "ready"
+            
+        elif episode5_stage == 1:
+            screen.blit(episode_5_bg_img, (0, 0))
+            screen.blit(dog_episode4_img, dog)
+            screen.blit(dog_friend_episode4_img, dog_friend)
+            
+            if not at_center:
+                if keys[pygame.K_a]:
+                    dog.x -= speed
+                    dog_friend.x -= speed
+                if keys[pygame.K_d]:
+                    dog.x += speed
+                    dog_friend.x += speed
+                
+                dog.x = max(20, min(WIDTH - 240, dog.x))
+                dog_friend.x = max(20, min(WIDTH - 240, dog_friend.x))
+                dog.y = GROUND_Y
+                dog_friend.y = GROUND_Y
+                
+                if abs(dog.x - WIDTH//2 + 120) < 30:
+                    at_center = True
+                    controls_blocked = True
+            
+            if at_center:
+                episode5_stage = 2
+        
+        elif episode5_stage == 2:
+            screen.blit(episode_5_bg_img, (0, 0))
+            screen.blit(dog_episode4_img, dog)
+            screen.blit(dog_friend_episode4_img, dog_friend)
+            
+            overlay = pygame.Surface((WIDTH, HEIGHT))
+            overlay.set_alpha(150)
+            overlay.fill((0, 0, 0))
+            screen.blit(overlay, (0, 0))
+            
+            if episode5_question_phase == "ready":
+                question_text = big_font.render("Фінал, ви готові морально?", True, (255, 255, 255))
+                text_rect = question_text.get_rect(center=(WIDTH//2, HEIGHT//2 - 80))
+                screen.blit(question_text, text_rect)
+                
+                yes_text = big_font.render("Y - ТАК     N - НІ", True, (0, 255, 0))
+                yes_rect = yes_text.get_rect(center=(WIDTH//2, HEIGHT//2 + 20))
+                screen.blit(yes_text, yes_rect)
+                
+            elif episode5_question_phase == "sure":
+                question_text = big_font.render("Точно?", True, (255, 255, 255))
+                text_rect = question_text.get_rect(center=(WIDTH//2, HEIGHT//2 - 80))
+                screen.blit(question_text, text_rect)
+                
+                yes_text = big_font.render("Y - ТАК     N - НІ (НЕДОСТУПНО)", True, (0, 255, 0))
+                yes_rect = yes_text.get_rect(center=(WIDTH//2, HEIGHT//2 + 20))
+                screen.blit(yes_text, yes_rect)
+        
+        elif episode5_stage == 3:
+            screen.fill((0, 0, 0))
+            end_text = fight_font.render("Гра завершена! Дякуємо за гру!", True, (255, 215, 0))
+            text_rect = end_text.get_rect(center=(WIDTH//2, HEIGHT//2))
+            screen.blit(end_text, text_rect)
+            
+            restart_text = font.render("Натисніть R щоб почати заново", True, (255, 255, 255))
+            restart_rect = restart_text.get_rect(center=(WIDTH//2, HEIGHT//2 + 60))
+            screen.blit(restart_text, restart_rect)
+            
+            if keys[pygame.K_r]:
+                reset_game()
+                
+        pygame.display.update()
+        clock.tick(60)
+        continue
     
     elif game_state == "black_screen":
         screen.fill((0, 0, 0))
+        pygame.display.update()
+        clock.tick(60)
+        continue
+
+    elif game_state == "game_over":
+        screen.fill((0, 0, 0))
+        end_text = fight_font.render("Гра завершена! Дякуємо за гру!", True, (255, 215, 0))
+        text_rect = end_text.get_rect(center=(WIDTH//2, HEIGHT//2))
+        screen.blit(end_text, text_rect)
+        
+        restart_text = font.render("Натисніть R щоб почати заново", True, (255, 255, 255))
+        restart_rect = restart_text.get_rect(center=(WIDTH//2, HEIGHT//2 + 60))
+        screen.blit(restart_text, restart_rect)
+        
+        if keys[pygame.K_r]:
+            reset_game()
+        
         pygame.display.update()
         clock.tick(60)
         continue
