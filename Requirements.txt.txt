@@ -1,0 +1,6 @@
+pip install pygame
+pip install sys
+pip install requests
+pip install BytesIO
+pip install tempfile
+pip install opencv-python
